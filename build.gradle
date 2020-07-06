@@ -21,6 +21,11 @@ allprojects {
     }
 }
 
+ext {
+    koinScopeVersion = '2.1.5'
+    koinViewModelVersion = '2.1.5'
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

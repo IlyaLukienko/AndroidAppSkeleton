@@ -1,4 +1,4 @@
-package com.lukienko.androidappskeleton
+package com.lukienko.androidappskeleton.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.lukienko.androidappskeleton.R
 
 private const val ARG_NAME = "name"
 
