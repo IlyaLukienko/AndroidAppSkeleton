@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitProvider() {
+class RetrofitProvider {
 
     private fun provideClient(): OkHttpClient {
         return OkHttpClient.Builder().build()

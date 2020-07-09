@@ -3,14 +3,10 @@ package com.lukienko.androidappskeleton.presentation.characterDetails
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.lukienko.androidappskeleton.R
 import com.lukienko.androidappskeleton.data.entity.Character
-import com.lukienko.androidappskeleton.presentation.utils.ImageLoader
 import kotlinx.android.synthetic.main.location_resident_recycler_cell.view.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class ResidentListAdapter(private val residents: List<Character>) :
     RecyclerView.Adapter<ResidentListAdapter.Holder>() {

@@ -56,7 +56,6 @@ class CharacterDetailsFragment : BaseFragment(), KoinComponent {
         }
     }
 
-
     private fun showName(name: String) {
         tvCharacterName.text = name
     }
@@ -88,11 +87,15 @@ class CharacterDetailsFragment : BaseFragment(), KoinComponent {
         toolbar.setNavigationOnClickListener { navController.navigateUp() }
         ivResidentSelection.setOnClickListener {
             it.isSelected = !it.isSelected
-            if (it.isSelected) {
-                rvLocationResidents.visibility = View.VISIBLE
-            } else {
-                rvLocationResidents.visibility = View.GONE
-            }
+            setListVisibility(it)
+        }
+    }
+
+    private fun setListVisibility(it: View) {
+        if (it.isSelected) {
+            rvLocationResidents.visibility = View.VISIBLE
+        } else {
+            rvLocationResidents.visibility = View.GONE
         }
     }
 }

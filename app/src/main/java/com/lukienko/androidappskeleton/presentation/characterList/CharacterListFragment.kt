@@ -2,6 +2,7 @@ package com.lukienko.androidappskeleton.presentation.characterList
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,15 +40,22 @@ class CharacterListFragment : BaseFragment(), KoinComponent {
             rvCharacters.layoutManager = LinearLayoutManager(context)
             rvCharacters.adapter = adapter
             adapter.onItemClick = { character, imageView ->
-                val extras = FragmentNavigatorExtras(
-                    imageView to character.id.toString()
-                )
-                val action = CharacterListFragmentDirections.navToItemDetailFragment(
-                    character = character
-                )
-                navController.navigate(action, extras)
+                navigateToDetailsScreen(imageView, character)
             }
         }
+    }
+
+    private fun navigateToDetailsScreen(
+        imageView: ImageView,
+        character: Character
+    ) {
+        val extras = FragmentNavigatorExtras(
+            imageView to character.id.toString()
+        )
+        val action = CharacterListFragmentDirections.navToItemDetailFragment(
+            character = character
+        )
+        navController.navigate(action, extras)
     }
 
     private fun loadingVisibility(isVisible: Boolean) {

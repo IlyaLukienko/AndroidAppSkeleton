@@ -16,7 +16,7 @@ class CharacterRepository : ICharacterRepository, KoinComponent {
         return retrofitProvider
             .getApiService()
             .getCharacters()
-            .map { it?.results }
+            .map { it.results }
     }
 
     override fun getLocation(id: Int): Single<Location> {
