@@ -30,11 +30,14 @@ class CharacterDetailsFragment : BaseFragment(), KoinComponent {
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         val character = args.character
         viewModel.loadResidents(character.id)
-        bindViews(character)
+        showName(character.name)
+        showPhoto(character.image, character.id.toString())
+        showLocationName(character.location?.name)
+        bindViews()
         bindViewsActions()
     }
 
-    private fun bindViews(character: Character) {
+    private fun bindViews() {
         viewModel.loadingProgressVisible.observe(
             viewLifecycleOwner,
             Observer { loadingVisibility(it) })
@@ -42,18 +45,12 @@ class CharacterDetailsFragment : BaseFragment(), KoinComponent {
             viewLifecycleOwner,
             Observer { if (it) showSnackBarError() })
         viewModel.residents.observe(viewLifecycleOwner, Observer { initList(it) })
-
-        showName(character.name)
-        showPhoto(character.image, character.id.toString())
-        showLocationName(character.location?.name)
     }
 
-    private fun initList(list: List<Character>?) {
-        list?.let {
-            val adapter = ResidentListAdapter(it)
-            rvLocationResidents.layoutManager = LinearLayoutManager(context)
-            rvLocationResidents.adapter = adapter
-        }
+    private fun initList(list: List<Character>) {
+        val adapter = ResidentListAdapter(list)
+        rvLocationResidents.layoutManager = LinearLayoutManager(context)
+        rvLocationResidents.adapter = adapter
     }
 
     private fun showName(name: String) {

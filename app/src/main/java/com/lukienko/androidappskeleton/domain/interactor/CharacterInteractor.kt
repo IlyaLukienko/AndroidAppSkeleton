@@ -35,7 +35,9 @@ class CharacterInteractor : KoinComponent {
         val ids = residentUrls.map {
             it.substringAfterLast("/").toInt()
         }
-        return Observable.fromIterable(ids)
+        return Observable
+            .fromIterable(ids)
+            .subscribeOn(Schedulers.computation())
     }
 
     fun getSortedCharactersByDate(characters: List<Character>, isSorted: Boolean): List<Character> {

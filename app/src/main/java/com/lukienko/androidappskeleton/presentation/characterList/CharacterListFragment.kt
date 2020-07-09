@@ -29,19 +29,21 @@ class CharacterListFragment : BaseFragment(), KoinComponent {
     }
 
     private fun bindLiveData() {
-        viewModel.loadingProgressVisible.observe(viewLifecycleOwner, Observer { loadingVisibility(it) })
-        viewModel.errorMessageVisible.observe(viewLifecycleOwner, Observer { if(it) showSnackBarError() })
+        viewModel.loadingProgressVisible.observe(
+            viewLifecycleOwner,
+            Observer { loadingVisibility(it) })
+        viewModel.errorMessageVisible.observe(
+            viewLifecycleOwner,
+            Observer { if (it) showSnackBarError() })
         viewModel.characters.observe(viewLifecycleOwner, Observer { initList(it) })
     }
 
-    private fun initList(list: List<Character>?) {
-        list?.let {
-            val adapter = CharactersAdapter(it)
-            rvCharacters.layoutManager = LinearLayoutManager(context)
-            rvCharacters.adapter = adapter
-            adapter.onItemClick = { character, imageView ->
-                navigateToDetailsScreen(imageView, character)
-            }
+    private fun initList(list: List<Character>) {
+        val adapter = CharactersAdapter(list)
+        rvCharacters.layoutManager = LinearLayoutManager(context)
+        rvCharacters.adapter = adapter
+        adapter.onItemClick = { character, imageView ->
+            navigateToDetailsScreen(imageView, character)
         }
     }
 
