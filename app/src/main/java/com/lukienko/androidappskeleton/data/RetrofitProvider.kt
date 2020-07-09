@@ -13,12 +13,13 @@ class RetrofitProvider() {
         return OkHttpClient.Builder().build()
     }
 
-    private fun provideRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("https://rickandmortyapi.com/api/")
-        .client(provideClient())
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-        .build()
+    private fun provideRetrofit(): Retrofit =
+        Retrofit.Builder()
+            .baseUrl("https://rickandmortyapi.com/api/")
+            .client(provideClient())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .build()
 
     fun getApiService(): ApiService =
         provideRetrofit().create(ApiService::class.java)

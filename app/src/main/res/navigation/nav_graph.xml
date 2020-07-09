@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/destinationCharacterList">
+
+    <fragment
+        android:id="@+id/destinationCharacterList"
+        android:name="com.lukienko.androidappskeleton.presentation.characterList.CharacterListFragment"
+        android:label="Character List Fragment"
+        tools:layout="@layout/fragment_character_list" />
+
+    <fragment
+        android:id="@+id/destinationCharacterDetails"
+        android:name="com.lukienko.androidappskeleton.presentation.characterDetails.CharacterDetailsFragment"
+        android:label="Character Details Fragment"
+        tools:layout="@layout/fragment_character_details" />
+</navigation>
