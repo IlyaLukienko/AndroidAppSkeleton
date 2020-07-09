@@ -22,11 +22,12 @@ class CharacterListFragment : BaseFragment(), KoinComponent {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindLiveData()
+        bindViewsActions()
     }
 
     private fun bindLiveData() {
         viewModel.loadingProgress.observe(viewLifecycleOwner, Observer { loadingVisibility(it) })
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer {  })
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { })
         viewModel.characters.observe(viewLifecycleOwner, Observer { initList(it) })
     }
 
@@ -39,5 +40,9 @@ class CharacterListFragment : BaseFragment(), KoinComponent {
                 navController.navigate(R.id.destinationCharacterDetails)
             }
         }
+    }
+
+    private fun bindViewsActions() {
+        ivFilter.setOnClickListener { viewModel.sortCharacters() }
     }
 }

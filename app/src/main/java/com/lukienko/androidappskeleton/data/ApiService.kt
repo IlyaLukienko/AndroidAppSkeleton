@@ -1,4 +1,4 @@
-package com.lukienko.androidappskeleton.core
+package com.lukienko.androidappskeleton.data
 
 import com.lukienko.androidappskeleton.data.CharacterResult
 import io.reactivex.Single

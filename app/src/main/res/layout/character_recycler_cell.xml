@@ -4,15 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
+    android:padding="@dimen/default_margin"
     android:background="@color/colorWhite">
 
-<TextView
-    android:id="@+id/tvCharacterName"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintStart_toStartOf="parent"
-    tools:text="Some placeholder name"
-    app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/ivCharacterAvatar"
+        android:layout_width="@dimen/circle_avatar_size"
+        android:layout_height="@dimen/circle_avatar_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCharacterName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tvCharacterStatus"
+        app:layout_constraintStart_toEndOf="@id/ivCharacterAvatar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Ricky Morty" />
+
+    <TextView
+        android:id="@+id/tvCharacterGender"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:textSize="@dimen/medium_text_size"
+        app:layout_constraintStart_toEndOf="@id/ivCharacterAvatar"
+        app:layout_constraintTop_toBottomOf="@id/tvCharacterName"
+        tools:text="Male" />
+
+    <TextView
+        android:id="@+id/tvCharacterStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:gravity="end"
+        android:textSize="@dimen/small_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvCharacterName"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Alive" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.lukienko.androidappskeleton.data
 
-import com.lukienko.androidappskeleton.core.ApiService
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
