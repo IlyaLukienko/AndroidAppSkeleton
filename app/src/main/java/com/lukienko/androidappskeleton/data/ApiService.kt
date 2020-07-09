@@ -1,6 +1,5 @@
 package com.lukienko.androidappskeleton.data
 
-import com.lukienko.androidappskeleton.data.CharacterResult
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET

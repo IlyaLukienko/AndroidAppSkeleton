@@ -10,9 +10,9 @@ import org.koin.core.inject
 
 class CharacterListViewModel : ViewModel(), KoinComponent {
     private val interactor: CharacterInteractor by inject()
-    val disposable: CompositeDisposable = CompositeDisposable()
-    val errorMessage = MutableLiveData<String>()
-    val loadingProgress = MutableLiveData<Boolean>()
+    private val disposable: CompositeDisposable = CompositeDisposable()
+    val errorMessageVisible = MutableLiveData<Boolean>()
+    val loadingProgressVisible = MutableLiveData<Boolean>()
     val characters = MutableLiveData<List<Character>>()
     var isListSorted = false
 
@@ -21,16 +21,17 @@ class CharacterListViewModel : ViewModel(), KoinComponent {
     }
 
     private fun loadCharacters() {
-        loadingProgress.postValue(true)
+        loadingProgressVisible.postValue(true)
+        errorMessageVisible.postValue(false)
         disposable.add(
             interactor
                 .loadCharacters()
                 .subscribe({
                     characters.postValue(it)
-                    loadingProgress.postValue(false)
+                    loadingProgressVisible.postValue(false)
                 }, {
-                    errorMessage.postValue(it.message)
-                    loadingProgress.postValue(false)
+                    errorMessageVisible.postValue(true)
+                    loadingProgressVisible.postValue(false)
                 })
         )
     }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.lukienko.androidappskeleton.R
 import com.lukienko.androidappskeleton.data.Character
 import com.lukienko.androidappskeleton.presentation.BaseFragment
@@ -26,8 +27,8 @@ class CharacterListFragment : BaseFragment(), KoinComponent {
     }
 
     private fun bindLiveData() {
-        viewModel.loadingProgress.observe(viewLifecycleOwner, Observer { loadingVisibility(it) })
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { })
+        viewModel.loadingProgressVisible.observe(viewLifecycleOwner, Observer { loadingVisibility(it) })
+        viewModel.errorMessageVisible.observe(viewLifecycleOwner, Observer { if(it) showSnackBarError() })
         viewModel.characters.observe(viewLifecycleOwner, Observer { initList(it) })
     }
 
@@ -40,6 +41,18 @@ class CharacterListFragment : BaseFragment(), KoinComponent {
                 navController.navigate(R.id.destinationCharacterDetails)
             }
         }
+    }
+
+    private fun loadingVisibility(isVisible: Boolean) {
+        if(isVisible) {
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun showSnackBarError(){
+        Snackbar.make(rootView, getString(R.string.unexpected_server_error), Snackbar.LENGTH_SHORT).show()
     }
 
     private fun bindViewsActions() {

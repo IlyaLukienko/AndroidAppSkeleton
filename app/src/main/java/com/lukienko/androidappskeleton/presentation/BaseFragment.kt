@@ -12,7 +12,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 
 abstract class BaseFragment : Fragment() {
-    private lateinit var loadingProgress: ProgressBar
     lateinit var navController: NavController
 
     override fun onCreateView(
@@ -27,19 +26,10 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        context?.let { loadingProgress = ProgressBar(requireActivity()) }
         setupNavigation()
     }
 
     private fun setupNavigation() {
         navController = NavHostFragment.findNavController(this)
-    }
-
-    fun loadingVisibility(isVisible: Boolean) {
-       if(isVisible) {
-           loadingProgress.visibility = VISIBLE
-       } else {
-           loadingProgress.visibility = GONE
-       }
     }
 }
