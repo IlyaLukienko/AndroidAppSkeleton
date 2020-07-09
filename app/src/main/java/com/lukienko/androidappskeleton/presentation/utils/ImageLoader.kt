@@ -17,4 +17,14 @@ class ImageLoader {
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(imageView)
     }
+
+    fun loadImage(
+        imageView: ImageView,
+        imageUrl: String
+    ) {
+        Glide.with(imageView.context)
+            .load(imageUrl)
+            .apply(RequestOptions().centerCrop())
+            .into(imageView)
+    }
 }

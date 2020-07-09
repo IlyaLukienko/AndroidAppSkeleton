@@ -9,11 +9,19 @@
         android:id="@+id/destinationCharacterList"
         android:name="com.lukienko.androidappskeleton.presentation.characterList.CharacterListFragment"
         android:label="Character List Fragment"
-        tools:layout="@layout/fragment_character_list" />
+        tools:layout="@layout/fragment_character_list">
+        <action
+            android:id="@+id/navToItemDetailFragment"
+            app:destination="@id/destinationCharacterDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/destinationCharacterDetails"
         android:name="com.lukienko.androidappskeleton.presentation.characterDetails.CharacterDetailsFragment"
         android:label="Character Details Fragment"
-        tools:layout="@layout/fragment_character_details" />
+        tools:layout="@layout/fragment_character_details">
+        <argument
+            android:name="character"
+            app:argType="com.lukienko.androidappskeleton.data.entity.Character" />
+    </fragment>
 </navigation>

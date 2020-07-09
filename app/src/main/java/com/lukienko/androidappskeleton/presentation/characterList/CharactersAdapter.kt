@@ -3,19 +3,20 @@ package com.lukienko.androidappskeleton.presentation.characterList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.lukienko.androidappskeleton.R
-import com.lukienko.androidappskeleton.data.Character
+import com.lukienko.androidappskeleton.data.entity.Character
 import com.lukienko.androidappskeleton.presentation.utils.ImageLoader
 import kotlinx.android.synthetic.main.character_recycler_cell.view.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class CharactersAdapter(private val users: List<Character>) :
+class CharactersAdapter(private val characterList: List<Character>) :
     RecyclerView.Adapter<CharactersAdapter.Holder>(), KoinComponent {
 
     private val imageLoader: ImageLoader by inject()
-    var onItemClick: ((character: Character) -> Unit)? = null
+    var onItemClick: ((character: Character, imageView: ImageView) -> Unit)? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, itemViewType: Int): Holder {
         return Holder(
@@ -28,11 +29,11 @@ class CharactersAdapter(private val users: List<Character>) :
     }
 
     override fun onBindViewHolder(viewHolder: Holder, position: Int) {
-        viewHolder.bind(users[position])
+        viewHolder.bind(characterList[position])
     }
 
     override fun getItemCount(): Int {
-        return users.size
+        return characterList.size
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,7 +43,8 @@ class CharactersAdapter(private val users: List<Character>) :
             itemView.tvCharacterStatus.text = character.status
             character.image?.let { imageLoader.loadCircleAvatar(itemView.ivCharacterAvatar, it) }
             itemView.setOnClickListener {
-                onItemClick?.invoke(character)
+                itemView.ivCharacterAvatar.transitionName = character.id.toString()
+                onItemClick?.invoke(character, itemView.ivCharacterAvatar)
             }
         }
     }

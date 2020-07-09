@@ -1,4 +1,4 @@
-package com.lukienko.androidappskeleton.presentation.characterList
+package com.lukienko.androidappskeleton.presentation.characterDetails
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,40 +8,27 @@ import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class CharacterListViewModel : ViewModel(), KoinComponent {
+class CharacterDetailsViewModel : ViewModel(), KoinComponent {
     private val interactor: CharacterInteractor by inject()
     private val disposable: CompositeDisposable = CompositeDisposable()
     val errorMessageVisible = MutableLiveData<Boolean>()
     val loadingProgressVisible = MutableLiveData<Boolean>()
-    val characters = MutableLiveData<List<Character>>()
-    var isListSorted = false
+    val residents = MutableLiveData<List<Character>>()
 
-    init {
-        loadCharacters()
-    }
-
-    private fun loadCharacters() {
+    fun loadResidents(id: Int) {
         loadingProgressVisible.postValue(true)
         errorMessageVisible.postValue(false)
         disposable.add(
             interactor
-                .loadCharacters()
+                .loadResidents(id)
                 .subscribe({
-                    characters.postValue(it)
+                    residents.postValue(it)
                     loadingProgressVisible.postValue(false)
                 }, {
                     errorMessageVisible.postValue(true)
                     loadingProgressVisible.postValue(false)
                 })
         )
-    }
-
-    fun sortCharacters() {
-        characters.value?.let {
-            val sortedList = interactor.getSortedCharactersByDate(it, isListSorted)
-            characters.postValue(sortedList)
-            isListSorted = !isListSorted
-        }
     }
 
     override fun onCleared() {

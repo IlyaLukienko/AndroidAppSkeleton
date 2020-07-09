@@ -4,4 +4,6 @@
     <string name="characters">Characters</string>
     <string name="unexpected_server_error">Unexpected server error</string>
     <string name="close">Close</string>
+    <string name="character_details">Character details</string>
+    <string name="residents">Residents:</string>
 </resources>

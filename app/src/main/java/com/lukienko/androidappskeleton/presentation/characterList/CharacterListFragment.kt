@@ -3,10 +3,11 @@ package com.lukienko.androidappskeleton.presentation.characterList
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.lukienko.androidappskeleton.R
-import com.lukienko.androidappskeleton.data.Character
+import com.lukienko.androidappskeleton.data.entity.Character
 import com.lukienko.androidappskeleton.presentation.BaseFragment
 import kotlinx.android.synthetic.main.fragment_character_list.*
 import org.koin.android.ext.android.inject
@@ -37,8 +38,14 @@ class CharacterListFragment : BaseFragment(), KoinComponent {
             val adapter = CharactersAdapter(it)
             rvCharacters.layoutManager = LinearLayoutManager(context)
             rvCharacters.adapter = adapter
-            adapter.onItemClick = {
-                navController.navigate(R.id.destinationCharacterDetails)
+            adapter.onItemClick = { character, imageView ->
+                val extras = FragmentNavigatorExtras(
+                    imageView to character.id.toString()
+                )
+                val action = CharacterListFragmentDirections.navToItemDetailFragment(
+                    character = character
+                )
+                navController.navigate(action, extras)
             }
         }
     }
