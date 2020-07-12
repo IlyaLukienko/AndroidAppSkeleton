@@ -101,20 +101,28 @@
                 app:layout_constraintTop_toBottomOf="@id/tvResidents"
                 tools:listitem="@layout/location_resident_recycler_cell" />
 
-            <ProgressBar
+            <FrameLayout
                 android:id="@+id/progressBar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/progress_bar_size"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/small_margin"
-                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_height="0dp"
                 android:visibility="gone"
-                android:indeterminateTint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 tools:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLocationName" />
+                android:background="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/progress_bar_size"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:indeterminateTint="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                   />
+            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
