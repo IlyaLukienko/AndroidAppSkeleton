@@ -4,7 +4,6 @@ import com.lukienko.androidappskeleton.data.entity.Character
 import com.lukienko.androidappskeleton.data.entity.Location
 import com.lukienko.androidappskeleton.data.RetrofitProvider
 import com.lukienko.androidappskeleton.domain.repository.ICharacterRepository
-import io.reactivex.Observable
 import io.reactivex.Single
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -25,8 +24,9 @@ class CharacterRepository : ICharacterRepository, KoinComponent {
             .getLocation(id)
     }
 
-    override fun getCharacter(id: Int): Observable<Character> {
+    override fun getCharacter(id: Int): Single<Character> {
         return retrofitProvider
             .getApiService()
-            .getCharacter(id)    }
+            .getCharacter(id)
+    }
 }

@@ -12,5 +12,5 @@ data class Character(
     val species: String?,
     val gender: String?,
     val created: String?,
-    val location: Location?
+    val location: Location
 ): Parcelable

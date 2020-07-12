@@ -22,11 +22,18 @@ class CharacterInteractor : KoinComponent {
             .doAfterSuccess { characterList = it }
     }
 
+    fun loadCharacter(id: Int): Single<Character> {
+        return characterRepository
+            .getCharacter(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun loadResidents(id: Int): Single<List<Character>> {
         return characterRepository.getLocation(id)
             .subscribeOn(Schedulers.io())
             .flatMapObservable { location -> getResidentsIds(location.residents) }
-            .flatMap { it -> characterRepository.getCharacter(it) }
+            .flatMapSingle{ it -> characterRepository.getCharacter(it) }
             .toList()
             .observeOn(AndroidSchedulers.mainThread())
     }

@@ -16,7 +16,7 @@ class CharactersAdapter(private val characterList: List<Character>) :
     RecyclerView.Adapter<CharactersAdapter.Holder>(), KoinComponent {
 
     private val imageLoader: ImageLoader by inject()
-    var onItemClick: ((character: Character, imageView: ImageView) -> Unit)? = null
+    var onItemClick: ((id: Int, imageView: ImageView) -> Unit)? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, itemViewType: Int): Holder {
         return Holder(
@@ -44,7 +44,7 @@ class CharactersAdapter(private val characterList: List<Character>) :
             character.image?.let { imageLoader.loadCircleAvatar(itemView.ivCharacterAvatar, it) }
             itemView.setOnClickListener {
                 itemView.ivCharacterAvatar.transitionName = character.id.toString()
-                onItemClick?.invoke(character, itemView.ivCharacterAvatar)
+                onItemClick?.invoke(character.id, itemView.ivCharacterAvatar)
             }
         }
     }

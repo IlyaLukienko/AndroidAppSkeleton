@@ -13,7 +13,7 @@ interface ApiService {
     fun getCharacters(): Single<CharacterResult>
 
     @GET("character/{id}")
-    fun getCharacter(@Path("id") id: Int): Observable<Character>
+    fun getCharacter(@Path("id") id: Int): Single<Character>
 
     @GET("location/{id}")
     fun getLocation(@Path("id") id: Int): Single<Location>

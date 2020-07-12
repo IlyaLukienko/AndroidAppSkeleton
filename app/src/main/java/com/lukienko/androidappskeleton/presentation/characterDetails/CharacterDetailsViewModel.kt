@@ -14,16 +14,35 @@ class CharacterDetailsViewModel : ViewModel(), KoinComponent {
     val errorMessageVisible = MutableLiveData<Boolean>()
     val loadingProgressVisible = MutableLiveData<Boolean>()
     val residents = MutableLiveData<List<Character>>()
+    val character = MutableLiveData<Character>()
 
-    fun loadResidents(id: Int) {
+    fun loadData(id: Int) {
         loadingProgressVisible.postValue(true)
         errorMessageVisible.postValue(false)
+        loadCharacter(id)
+        loadResidents(id)
+    }
+
+    private fun loadResidents(id: Int) {
         disposable.add(
             interactor
                 .loadResidents(id)
                 .subscribe({
                     residents.postValue(it)
                     loadingProgressVisible.postValue(false)
+                }, {
+                    errorMessageVisible.postValue(true)
+                    loadingProgressVisible.postValue(false)
+                })
+        )
+    }
+
+    private fun loadCharacter(id: Int) {
+        disposable.add(
+            interactor
+                .loadCharacter(id)
+                .subscribe({ value ->
+                    value?.let { character.postValue(it) }
                 }, {
                     errorMessageVisible.postValue(true)
                     loadingProgressVisible.postValue(false)

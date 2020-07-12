@@ -28,11 +28,7 @@ class CharacterDetailsFragment : BaseFragment(), KoinComponent {
         super.onViewCreated(view, savedInstanceState)
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        val character = args.character
-        viewModel.loadResidents(character.id)
-        showName(character.name)
-        showPhoto(character.image, character.id.toString())
-        showLocationName(character.location?.name)
+        viewModel.loadData(args.id)
         bindViews()
         bindViewsActions()
     }
@@ -44,6 +40,11 @@ class CharacterDetailsFragment : BaseFragment(), KoinComponent {
         viewModel.errorMessageVisible.observe(
             viewLifecycleOwner,
             Observer { if (it) showSnackBarError() })
+        viewModel.character.observe(viewLifecycleOwner, Observer {
+            showName(it.name)
+            showPhoto(it.image, args.id.toString())
+            showLocationName(it.location.name)
+        })
         viewModel.residents.observe(viewLifecycleOwner, Observer { initList(it) })
     }
 

@@ -42,20 +42,20 @@ class CharacterListFragment : BaseFragment(), KoinComponent {
         val adapter = CharactersAdapter(list)
         rvCharacters.layoutManager = LinearLayoutManager(context)
         rvCharacters.adapter = adapter
-        adapter.onItemClick = { character, imageView ->
-            navigateToDetailsScreen(imageView, character)
+        adapter.onItemClick = { id, imageView ->
+            navigateToDetailsScreen(imageView, id)
         }
     }
 
     private fun navigateToDetailsScreen(
         imageView: ImageView,
-        character: Character
+        id: Int
     ) {
         val extras = FragmentNavigatorExtras(
-            imageView to character.id.toString()
+            imageView to id.toString()
         )
         val action = CharacterListFragmentDirections.navToItemDetailFragment(
-            character = character
+            id = id
         )
         navController.navigate(action, extras)
     }
