@@ -6,6 +6,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module(override = true) {
-    viewModel { CharacterListViewModel() }
+    viewModel { CharacterListViewModel(get()) }
     viewModel { CharacterDetailsViewModel() }
 }

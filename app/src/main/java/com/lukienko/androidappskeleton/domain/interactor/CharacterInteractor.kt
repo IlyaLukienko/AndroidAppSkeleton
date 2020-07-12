@@ -6,12 +6,8 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class CharacterInteractor : KoinComponent {
-
-    private val characterRepository: ICharacterRepository by inject()
+class CharacterInteractor(private val characterRepository: ICharacterRepository) {
     private var characterList: List<Character>? = null
 
     fun loadCharacters(): Single<List<Character>> {
