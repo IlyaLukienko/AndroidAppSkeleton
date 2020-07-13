@@ -40,6 +40,7 @@ class CharacterListViewModelTest{
         viewModel.loadingProgressVisible.observeForever(loadingObserver)
         viewModel.loadCharacters()
         verify { loadingObserver.onChanged(true) }
+        confirmVerified(loadingObserver)
     }
 
     @Test
@@ -49,6 +50,7 @@ class CharacterListViewModelTest{
         every { interactor.loadCharacters() } returns Single.just(listOf())
         viewModel.loadCharacters()
         verify { errorObserver.onChanged(false) }
+        confirmVerified(errorObserver)
     }
 
     @Test

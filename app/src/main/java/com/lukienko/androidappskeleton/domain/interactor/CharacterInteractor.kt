@@ -34,8 +34,8 @@ class CharacterInteractor(private val characterRepository: ICharacterRepository)
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    private fun getResidentsIds(residentUrls: List<String>): Observable<Int> {
-        val ids = residentUrls.map {
+    private fun getResidentsIds(residentUrls: List<String>?): Observable<Int> {
+        val ids = residentUrls?.map {
             it.substringAfterLast("/").toInt()
         }
         return Observable

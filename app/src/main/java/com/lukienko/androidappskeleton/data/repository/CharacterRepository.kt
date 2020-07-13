@@ -6,10 +6,8 @@ import com.lukienko.androidappskeleton.data.RetrofitProvider
 import com.lukienko.androidappskeleton.domain.repository.ICharacterRepository
 import io.reactivex.Single
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class CharacterRepository : ICharacterRepository, KoinComponent {
-    private val retrofitProvider: RetrofitProvider by inject()
+class CharacterRepository(private val retrofitProvider: RetrofitProvider) : ICharacterRepository, KoinComponent {
 
     override fun getCharacters(): Single<List<Character>> {
         return retrofitProvider

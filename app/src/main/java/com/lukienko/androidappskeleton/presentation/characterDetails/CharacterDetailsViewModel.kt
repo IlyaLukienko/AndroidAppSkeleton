@@ -5,11 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.lukienko.androidappskeleton.data.entity.Character
 import com.lukienko.androidappskeleton.domain.interactor.CharacterInteractor
 import io.reactivex.disposables.CompositeDisposable
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class CharacterDetailsViewModel : ViewModel(), KoinComponent {
-    private val interactor: CharacterInteractor by inject()
+class CharacterDetailsViewModel(private val interactor: CharacterInteractor) : ViewModel() {
     private val disposable: CompositeDisposable = CompositeDisposable()
     val errorMessageVisible = MutableLiveData<Boolean>()
     val loadingProgressVisible = MutableLiveData<Boolean>()
